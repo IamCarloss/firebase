@@ -48,6 +48,9 @@ const guardar = document.getElementById('guar');
 
 
 
+document.getElementById("pp");
+
+
 /* crear sesion */
 crear.addEventListener('click', function () {
     createUserWithEmailAndPassword(auth, email.value, pass.value)
@@ -94,6 +97,7 @@ signInWithEmailAndPassword(auth, email.value, pass.value)
     document.getElementById('pass').style.visibility  = 'hidden';
     document.getElementById('logoogle').style.visibility  = 'hidden';
     document.getElementById('facebook').style.visibility  = 'hidden';
+    document.getElementById('pp').style.visibility  = 'visible';
     
   })
   .catch((error) => {

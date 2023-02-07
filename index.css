@@ -60,3 +60,57 @@ button:hover{
 #regi{
    visibility: hidden;
 }
+
+
+#regi{
+    width: 400px;
+    background-color: rgb(49, 48, 47);
+    padding: 60px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 4px;
+    font-family: 'Lucida Sans';
+    color: rgb(255, 255, 255);
+
+
+ }
+
+
+ #regi{
+    font-size: 20px;
+    margin-bottom: 20px;
+
+
+ }
+
+
+ .stylee{
+    width: 100%;
+    background: rgb(203, 201, 203);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    border: 5px solid #4b4d4d;
+ }
+
+
+ .boton4{
+    width: 100%;
+    background: rgb(33, 32, 32);
+    border: none;
+    padding: 12px;
+    color: white;
+    margin: 16px 0;
+    font-size: 16px;
+
+ }
+
+ .P {
+    color: #ffffff;
+    visibility: hidden;
+ }
+
+
+
+
+
