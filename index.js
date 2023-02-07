@@ -132,6 +132,7 @@ signOut(auth).then(() => {
   document.getElementById('pass').style.visibility  = 'visible';
   document.getElementById('logoogle').style.visibility  = 'visible';
   document.getElementById('facebook').style.visibility  = 'visible';
+  document.getElementById('pp').style.visibility  = 'hidden';
 
 
 }).catch((error) => {
