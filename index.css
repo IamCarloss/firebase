@@ -1,5 +1,5 @@
 body{
-    background: 202020;
+    background: 20 20 20;
     color: white;
 }
 
@@ -47,19 +47,16 @@ button:hover{
 }
 
 
-.ocultar {
-    display: none;
-  }
-  
+
 
 
 
 #cerrar {
-   display: none;
+ visibility: hidden;
     
   }
   
 
 #regi{
-    display: none;
+   visibility: hidden;
 }

@@ -58,10 +58,20 @@ crear.addEventListener('click', function () {
    
            
         })
+
+
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            alert (errorCode + '  ' + errorMessage);
+            
+           
+            if (error.code === 'auth/invalid-email') {
+              alert ('el email es inavlido ')
+              
+            }
+            else if(error.code === 'auth/weak-password'){
+              alert('el password debe de contener al menos 6 digitos pendejo')}
+        
            
         });
           });
@@ -76,20 +86,30 @@ signInWithEmailAndPassword(auth, email.value, pass.value)
   
     const user = userCredential.user;
     alert ('sesion iniciada');
-    document.getElementById('regi').style.display = 'block';
-    document.getElementById('cerrar').style.display = 'block';
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('crear').style.display = 'none';
-    document.getElementById('email').style.display = 'none';
-    document.getElementById('pass').style.display = 'none';
-    document.getElementById('logoogle').style.display = 'none';
-    document.getElementById('facebook').style.display = 'none';
-
+    document.getElementById('regi').style.visibility  = 'visible';
+    document.getElementById('cerrar').style.visibility = 'visible';
+    document.getElementById('login').style.visibility  = 'hidden';
+    document.getElementById('crear').style.visibility  = 'hidden';
+    document.getElementById('email').style.visibility  = 'hidden';
+    document.getElementById('pass').style.visibility  = 'hidden';
+    document.getElementById('logoogle').style.visibility  = 'hidden';
+    document.getElementById('facebook').style.visibility  = 'hidden';
+    
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    alert (errorCode + ' + ' + errorMessage);
+
+
+    if (errorCode === auth/invalid-email) {
+      alert('el email no valido debe de contener "@" ".com"')
+      
+    }
+    else if(errorCode === auth/weak-password ){
+      alert('el password debe de contener al menos 6 digitos')
+    }
+
+
   });
 
     });
@@ -100,14 +120,14 @@ signInWithEmailAndPassword(auth, email.value, pass.value)
 cerrar.addEventListener("click", function() {
 signOut(auth).then(() => {
   alert('sesion cerrada perfectamente')
-  document.getElementById('regi').style.display = 'none';
-  document.getElementById('cerrar').style.display = 'none';
-  document.getElementById('login').style.display = 'block';
-  document.getElementById('crear').style.display = 'block';
-  document.getElementById('email').style.display = 'block';
-  document.getElementById('pass').style.display = 'block';
-  document.getElementById('logoogle').style.display = 'block';
-  document.getElementById('facebook').style.display = 'block';
+  document.getElementById('regi').style.visibility  = 'hidden';
+  document.getElementById('cerrar').style.visibility  = 'hidden';
+  document.getElementById('login').style.visibility  = 'visible';
+  document.getElementById('crear').style.visibility  = 'visible';
+  document.getElementById('email').style.visibility  = 'visible';
+  document.getElementById('pass').style.visibility  = 'visible';
+  document.getElementById('logoogle').style.visibility  = 'visible';
+  document.getElementById('facebook').style.visibility  = 'visible';
 
 
 }).catch((error) => {
@@ -129,14 +149,14 @@ signInWithPopup(auth, providerGoogle)
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-    document.getElementById('regi').style.display = 'block';
-    document.getElementById('cerrar').style.display = 'block';
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('crear').style.display = 'none';
-    document.getElementById('email').style.display = 'none';
-    document.getElementById('pass').style.display = 'none';
-    document.getElementById('logoogle').style.display = 'none';
-    document.getElementById('facebook').style.display = 'none';
+    document.getElementById('regi').style.visibility  = 'visible';
+    document.getElementById('cerrar').style.visibility = 'visible';
+    document.getElementById('login').style.visibility  = 'hidden';
+    document.getElementById('crear').style.visibility  = 'hidden';
+    document.getElementById('email').style.visibility  = 'hidden';
+    document.getElementById('pass').style.visibility  = 'hidden';
+    document.getElementById('logoogle').style.visibility  = 'hidden';
+    document.getElementById('facebook').style.visibility  = 'hidden';
 
     // ...
     alert('sesion creada')
@@ -185,14 +205,14 @@ facebook.addEventListener('click', function(){
     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
     const credential = FacebookAuthProvider.credentialFromResult(result);
     const accessToken = credential.accessToken;
-    document.getElementById('regi').style.display = 'block';
-    document.getElementById('cerrar').style.display = 'block';
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('crear').style.display = 'none';
-    document.getElementById('email').style.display = 'none';
-    document.getElementById('pass').style.display = 'none';
-    document.getElementById('logoogle').style.display = 'none';
-    document.getElementById('facebook').style.display = 'none';
+    document.getElementById('regi').style.visibility  = 'visible';
+    document.getElementById('cerrar').style.visibility = 'visible';
+    document.getElementById('login').style.visibility  = 'hidden';
+    document.getElementById('crear').style.visibility  = 'hidden';
+    document.getElementById('email').style.visibility  = 'hidden';
+    document.getElementById('pass').style.visibility  = 'hidden';
+    document.getElementById('logoogle').style.visibility  = 'hidden';
+    document.getElementById('facebook').style.visibility  = 'hidden';
 
     // ...
   })
