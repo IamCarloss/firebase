@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    
-   
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
 
@@ -17,6 +15,7 @@
     
 </head>
 <body>
+
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container">
           <a class="navbar-brand" href="#">FireApp</a>
@@ -28,11 +27,7 @@
             
               <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#IniSesion">Identificarme</a>
-              </li>
-
-
-            
-              
+              </li>                       
             </ul>
           </div>
         </div>
@@ -65,20 +60,7 @@
                   <button id="cerrar" class="btn btn-danger" type="button">Cerrar sesion</button>
                   
                 </div>
-
-                
-                
-
-                
-    
-    
               </div>
-
-                   
-
-
-
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -87,10 +69,6 @@
       </div>
     </div>
   </div>
-
-
-
-
   <div class="modal fade" id="cerr" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content bg-dark" >
@@ -100,21 +78,7 @@
         </div>
         <div class="modal-body">
             <div>
-                
-                
-    
-    
-                
-                
-    
-    
               </div>
-
-                   
-
-
-
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -141,31 +105,126 @@
       <label for="">numero de telefono</label>
       <input type="number" placeholder="escribe tu telefono" class="stylee" id="num">
       <hr>
+      <label for="">Correo</label>
+      <input type="email" placeholder="escribe tu telefono" class="stylee" id="correo">
+      <hr>
      
       
-      <button id="guar" class="boton4">guardar</button>
-      <button id="mod" class="boton4">modificar</button>
+      <!-- <button id="guar" class="boton4">guardar</button>
+      <hr> -->
+      <button id="creardn" class="boton4">crear</button>
       <hr>
-      <input type="text">
-      <button></button>
+      <input type="text" id="IDInput" placeholder="buscar id">
+      <hr>
+      <button id="cargar" class="boton4">buscar por medio del id</button>
+      <button id="car-guar" class="boton4">guardar cambios</button>
+      <button id="borrar" class="boton4">borrar id</button>
+      <hr>
+      <button id="mos" class="boton4">mostrar mapa</button><button id="ocul" class="boton4">ocultar mapa</button>
+      
+      
 
+      
+      </div>
 
-    </div>
-    
     
     <div id="map" class="mapaa"></div>
     <hr>
-    <label for="">ubicacion:</label>
-    <input type="number" placeholder="escribe tu altitud" class="stylee" id="ubi">
-    <input type="number" placeholder="escribe tu longitud" class="stylee" id="ubi2">
-    <hr>
-    <button id="mos" class="boton4">mostrar mapa</button>
+
+
+
+
+    <div>
+      <h1>READ</h1>
+      <table id="tabla_base">
+       
+      </table>
+      <button id="verBD">Status</button>
+    </div>  
+    
+
+    
+    
+    
+
+
+    
     
 
 
 
-<script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+
+
+    <!-- <div id="registro">
+      <h1>Formulario</h1>
+      <label for="">nombre completo</label>
+      <input type="text" placeholder="escribe tu nombre" class="stylee" id="nomCom">
+      <hr>
+      <label for="">edad que tienes actualmente</label>
+      <input type="number" placeholder="escribe tu edad" class="stylee" id="edad">
+      <hr>
+      <label for="">genero con el que te identificas</label>
+      <input type="text" placeholder="escribe tu genero" class="stylee" id="gene">
+      <hr>
+      <label for="">numero de telefono</label>
+      <input type="number" placeholder="escribe tu telefono" class="stylee" id="num">
+      <hr>
+     
+      
+      <button id="guar" class="boton4">guardar</button>
+      
+      <hr>
+      
+      
+
+
+    </div>
+ -->
+
     
-  
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> 
 </body>
 </html>

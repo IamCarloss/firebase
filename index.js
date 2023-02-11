@@ -1,7 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider  } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
-import { collection, addDoc, doc, setDoc  } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
+import {collection, addDoc, doc, setDoc, getDoc, updateDoc, getDocs, deleteDoc  } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
+/*  */
 
 
 const firebaseConfig = {
@@ -23,27 +24,19 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const providerGoogle = new GoogleAuthProvider();
 const providerFacebook = new FacebookAuthProvider();
-
-
-
+////////////////////////////////////////////////////////
 const email = document.getElementById('email');
 const pass = document.getElementById('pass');
-/* const cerr = document.getElementById('cerrr'); */
-
 /* formulario */
 const NombreCom = document.getElementById('nomCom');
 const Edd = document.getElementById('edad');
 const genero = document.getElementById('gene');
 const numero = document.getElementById('num');
-const correo1 = document.getElementById('correo');
-
+const correo = document.getElementById('correo');
 /* inputs utilizados  */
 const ubicacion = document.getElementById('ubi');
 const ubicacion2 = document.getElementById('ubi2');
-
-
-
-
+const IDinput = document.getElementById('IDInput');
 /* botones */
 const crear = document.getElementById('crear');
 const logoogle = document.getElementById('logoogle');
@@ -53,7 +46,14 @@ const facebook = document.getElementById('facebook');
 const guardar = document.getElementById('guar');
 const modificar = document.getElementById('mod');
 const mostrar = document.getElementById('mos');
+const STATUS = document.getElementById('verBD');
+const crearbtn = document.getElementById('creardn');
+const carguar = document.getElementById('car-guar');
+const borrar = document.getElementById('borrar');
+const ocult_btn = document.getElementById('ocul');
 
+/* otro elemento */
+const tabla_base = document.getElementById('tabla_base');
 
 /* parrafo */
 document.getElementById("pp");
@@ -224,66 +224,62 @@ facebook.addEventListener('click', function(){
 
 
 /* base de datos */
-guardar.addEventListener("click", async() => {
+/* guardar.addEventListener("click", async() => {
   try {
     const docRef = await addDoc(collection(db, "users"), {
-      nombre:`${NombreCom.value} `,
-      Edad:`${Edd.value} `,
-      sexo:`${genero.value} `,
-      telefono:`${numero.value} `,
-      correo:`${correo1.value} `
+      nombre:'${NombreCom.value}',
+      edad:'${Edd.value}',
+      sexo:'${genero.value}',
+      telefono:'${numero.value}',
+      correo:'${correo1.value}'
       });
       document.getElementById('guar').style.display = 'none';
 
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
-    alert('no jalo')
+    alert('error en la base de datos')
   }
-});
-
-
-/* modificar.addEventListener(click, async()=> {
-await setDoc(doc(db, "users" ), {
-  nombre:`${NombreCom.value} `,
-  Edad:`${Edd.value} `,
-  sexo:`${genero.value} `,
-  telefono:`${numero.value} `,
-  correo:`${correo1.value} `
-});
 });
  */
 
+ocult_btn.addEventListener('click', function (){
+  document.getElementById("mos") .style.display = "block"
+  document.getElementById("ocul") .style.display = "none"
+  document.getElementById("map") .style.display = "none"
 
-  mostrar.addEventListener("click", function () {
-    
+              
+            })
+
+
+
+
+ mostrar.addEventListener("click", function  () {
+  document.getElementById("mos") .style.display = "none"
+  document.getElementById("ocul") .style.display = "block"
+  document.getElementById("map") .style.display = "block"
   document.getElementById('map').style.visibility = "visible";
   mapboxgl.accessToken = 'pk.eyJ1IjoiaWFtY2FybG9zZnQiLCJhIjoiY2xkdnV2cmF5MDE3bDNvanFmcGRqZ2d4cCJ9.ohJtRP33084CwLYUx-NT_w';
   const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/streets-v12', // style URL
-    center: [1,2], // starting position [lng, lat]
-    zoom: 1 // starting zoom
+    center: [1,1], // starting position [lng, lat]
+    zoom: 1 // starting 
+   
     
 
-  });
+  }); 
 
-  const marker1 = new mapboxgl.Marker()
-  .setLngLat([1, 40])
-  .addTo(map);
-
-
-  const marker2 = new mapboxgl.Marker({ color: 'black', rotation: 45 })
-  .setLngLat([1, 40])
-  .addTo(map);
-
+  
+  /* document.getElementById("mos") .style.display = "none"
+  document.getElementById("ocult") .style.display = "block" */
 
 
  
-map.on('load', () => {
+     map.on('load', () => {
 // Load an image from an external URL.
 map.loadImage(
-'https://cdn-icons-png.flaticon.com/512/6830/6830714.png',
+'https://cdn-icons-png.flaticon.com/128/595/595562.png',
 (error, image) => {
 if (error) throw error;
  
@@ -300,7 +296,7 @@ map.addSource('point', {
 'type': 'Feature',
 'geometry': {
 'type': 'Point',
-'coordinates': [-77.4144, 25.0759]
+'coordinates': [1,1]
 }
 }
 ]
@@ -308,28 +304,121 @@ map.addSource('point', {
 });
  
 // Add a layer to use the image to represent the data.
-map.addLayer({
-'id': 'points',
-'type': 'symbol',
-'source': 'point', // reference the data source
-'layout': {
-'icon-image': 'cat', // reference the image
-'icon-size': 0.25
-}
-});
-}
-);
-});
+  map.addLayer({
+  'id': 'points',
+  'type': 'symbol',
+  'source': 'point', // reference the data source
+  'layout': {
+  'icon-image': 'cat', // reference the image
+  'icon-size': 0.25
+  }
+    });
+        }
+          );
+            });
 
-});
+              });
+ 
+
+ 
+   crearbtn.addEventListener("click", async () => {
+     try {
+         await setDoc(doc(db, "users", NombreCom.value), {
+
+                     
+          nombre:NombreCom.value,
+          edad:Edd.value,
+          sexo:genero.value,
+          telefono:numero.value,
+          correo:correo.value
+           });
+             alert(`gracias ${NombreCom.value} ah sido agregado a la base de datos!`);
+                } catch (error) {
+                    alert(error);
+                }
+            });
+ 
+
+
+
+
+            
+      STATUS.addEventListener("click", async () => {
+              tabla_base.innerHTML =
+               `<tr>
+                    <td>id</td>
+                    <td>nombre</td>
+                    <td>edad</td>
+                    <td>sexo</td>
+                    <td>numero</td>
+                    <td>correo</td>
+                </tr>`;
+                
+            
+                const querySnapshot = await getDocs(collection(db, "users"));
+                querySnapshot.forEach((doc) => {
+            
+                    console.log(doc.id, " => ", doc.data());
+                    tabla_base.innerHTML +=
+                        `<tr>
+                        <td>${doc.id}</td>
+                        <td>${doc.data().nombre}</td>
+                        <td>${doc.data().edad}</td>
+                        <td>${doc.data().sexo}</td>
+                        <td>${doc.data().telefono}</td>
+                        <td>${doc.data().correo}</td>
+                    </tr>`;
+                });
+            });
+            
+
+
+
+           cargar.addEventListener("click", async () => {
+                const docRef = doc(db, "users", IDInput.value);
+                const docSnap = await getDoc(docRef);
+            
+                if (docSnap.exists()) {
+                  NombreCom.value = docSnap.data().nombre;
+                  Edd.value = docSnap.data().edad;
+                  genero.value = docSnap.data().sexo;
+                  numero.value = docSnap.data().telefono;
+                  correo.value = docSnap.data().correo;
+                    console.log("Document data:", docSnap.data());
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            });
+
+
+
+
+            carguar.addEventListener("click", async() => {
+                const elementRef = doc(db, "users", IDInput.value);
+            
+                await updateDoc(elementRef, {
+                  nombre:NombreCom.value,
+                  edad:Edd.value,
+                  sexo:genero.value,
+                  telefono:numero.value,
+                  correo:correo.value
+                });
+            });
+
+
+
+            borrar.addEventListener("click", async()=>{
+                await deleteDoc(doc(db, "users", IDInput.value));
+                alert('id borrado')
+            })
+ 
 
 
 
 
 
-
-
-
+            
 
 
 
