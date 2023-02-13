@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider  } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider  } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
 import {collection, addDoc, doc, setDoc, getDoc, updateDoc, getDocs, deleteDoc  } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
 /*  */
 
@@ -24,6 +24,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const providerGoogle = new GoogleAuthProvider();
 const providerFacebook = new FacebookAuthProvider();
+const providerGithub = new GithubAuthProvider();
 ////////////////////////////////////////////////////////
 const email = document.getElementById('email');
 const pass = document.getElementById('pass');
@@ -34,9 +35,9 @@ const genero = document.getElementById('gene');
 const numero = document.getElementById('num');
 const correo = document.getElementById('correo');
 /* inputs utilizados  */
-const ubicacion = document.getElementById('ubi');
+/* const ubicacion = document.getElementById('ubi');
 const ubicacion2 = document.getElementById('ubi2');
-const IDinput = document.getElementById('IDInput');
+const IDinput = document.getElementById('IDInput'); */
 /* botones */
 const crear = document.getElementById('crear');
 const logoogle = document.getElementById('logoogle');
@@ -51,9 +52,13 @@ const crearbtn = document.getElementById('creardn');
 const carguar = document.getElementById('car-guar');
 const borrar = document.getElementById('borrar');
 const ocult_btn = document.getElementById('ocul');
+const Github = document.getElementById('git');
+const ocultbd = document.getElementById('oculBD')
+
 
 /* otro elemento */
 const tabla_base = document.getElementById('tabla_base');
+const divtabla = document.getElementById('tabla_db');
 
 /* parrafo */
 document.getElementById("pp");
@@ -107,6 +112,7 @@ signInWithEmailAndPassword(auth, email.value, pass.value)
     document.getElementById('logoogle').style.visibility  = 'hidden';
     document.getElementById('facebook').style.visibility  = 'hidden';
     document.getElementById('pp').style.visibility  = 'visible';
+    document.getElementById('git').style.visibility  = 'hiden';
     
   })
   .catch((error) => {
@@ -134,6 +140,7 @@ signOut(auth).then(() => {
   document.getElementById('logoogle').style.visibility  = 'visible';
   document.getElementById('facebook').style.visibility  = 'visible';
   document.getElementById('pp').style.visibility  = 'hidden';
+  document.getElementById('git').style.visibility  = 'visible';
 
 
 }).catch((error) => {
@@ -163,6 +170,7 @@ signInWithPopup(auth, providerGoogle)
     document.getElementById('pass').style.visibility  = 'hidden';
     document.getElementById('logoogle').style.visibility  = 'hidden';
     document.getElementById('facebook').style.visibility  = 'hidden';
+    document.getElementById('git').style.visibility  = 'hidden';
     
 
     // ...
@@ -205,7 +213,7 @@ facebook.addEventListener('click', function(){
     document.getElementById('pass').style.visibility  = 'hidden';
     document.getElementById('logoogle').style.visibility  = 'hidden';
     document.getElementById('facebook').style.visibility  = 'hidden';
-
+    document.getElementById('git').style.visibility  = 'hiden';
     // ...
   })
   .catch((error) => {
@@ -222,7 +230,40 @@ facebook.addEventListener('click', function(){
 })
 
 
+        Github.addEventListener('click', function(){
+        signInWithPopup(auth, providerGithub)
+          .then((result) => {
+            // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+            const credential = GithubAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            document.getElementById('regi').style.visibility  = 'visible';
+            document.getElementById('cerrar').style.visibility = 'visible';
+            document.getElementById('pp').style.visibility  = 'visible';
+            document.getElementById('login').style.visibility  = 'hidden';
+            document.getElementById('crear').style.visibility  = 'hidden';
+            document.getElementById('email').style.visibility  = 'hidden';
+            document.getElementById('pass').style.visibility  = 'hidden';
+            document.getElementById('logoogle').style.visibility  = 'hidden';
+            document.getElementById('facebook').style.visibility  = 'hidden';
+            document.getElementById('git').style.visibility  = 'hiden';
 
+            // The signed-in user info.
+            const user = result.user;
+            // IdP data available using getAdditionalUserInfo(result)
+            // ...
+          }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GithubAuthProvider.credentialFromError(error);
+            // ...
+          });
+        });
+
+document.getElementById("ocul").style.display = "none";
 /* base de datos */
 /* guardar.addEventListener("click", async() => {
   try {
@@ -247,6 +288,7 @@ ocult_btn.addEventListener('click', function (){
   document.getElementById("mos") .style.display = "block"
   document.getElementById("ocul") .style.display = "none"
   document.getElementById("map") .style.display = "none"
+  document.getElementById("myInput").value = "";
 
               
             })
@@ -271,8 +313,7 @@ ocult_btn.addEventListener('click', function (){
   }); 
 
   
-  /* document.getElementById("mos") .style.display = "none"
-  document.getElementById("ocult") .style.display = "block" */
+  
 
 
  
@@ -304,16 +345,16 @@ map.addSource('point', {
 });
  
 // Add a layer to use the image to represent the data.
-  map.addLayer({
-  'id': 'points',
-  'type': 'symbol',
-  'source': 'point', // reference the data source
-  'layout': {
-  'icon-image': 'cat', // reference the image
-  'icon-size': 0.25
-  }
-    });
-        }
+       map.addLayer({
+          'id': 'points',
+          'type': 'symbol',
+          'source': 'point', // reference the data source
+          'layout': {
+          'icon-image': 'cat', // reference the image
+          'icon-size': 0.25
+                            }
+                      });
+                                 }
           );
             });
 
@@ -323,27 +364,50 @@ map.addSource('point', {
  
    crearbtn.addEventListener("click", async () => {
      try {
-         await setDoc(doc(db, "users", NombreCom.value), {
-
-                     
+         await setDoc(doc(db, "users", NombreCom.value),
+          {
+                    
           nombre:NombreCom.value,
           edad:Edd.value,
           sexo:genero.value,
           telefono:numero.value,
           correo:correo.value
            });
+                
              alert(`gracias ${NombreCom.value} ah sido agregado a la base de datos!`);
                 } catch (error) {
-                    alert(error);
-                }
-            });
- 
+                    alert('error desconocido');
 
+                   
+                }
+
+            });
+
+
+
+            ocultbd.addEventListener('click', function () {
+              
+              document.getElementById('tabla_db').style.display="none"
+              document.getElementById('nomCom').value = "";
+              document.getElementById('edad').value = "";
+              document.getElementById('gene').value = "";
+              document.getElementById('num').value = "";
+              document.getElementById('correo').value = "";   
+                            
+            })
 
 
 
             
-      STATUS.addEventListener("click", async () => {
+          STATUS.addEventListener("click", async () => {
+            document.getElementById('tabla_db').style.display="block"
+            document.getElementById('tabla_base').style.display="block"
+            document.getElementById('oculBD').style.display="block"
+        
+        
+
+         
+
               tabla_base.innerHTML =
                `<tr>
                     <td>id</td>
@@ -355,63 +419,73 @@ map.addSource('point', {
                 </tr>`;
                 
             
-                const querySnapshot = await getDocs(collection(db, "users"));
-                querySnapshot.forEach((doc) => {
+    const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
             
-                    console.log(doc.id, " => ", doc.data());
-                    tabla_base.innerHTML +=
-                        `<tr>
-                        <td>${doc.id}</td>
-                        <td>${doc.data().nombre}</td>
-                        <td>${doc.data().edad}</td>
-                        <td>${doc.data().sexo}</td>
-                        <td>${doc.data().telefono}</td>
-                        <td>${doc.data().correo}</td>
-                    </tr>`;
+          console.log(doc.id, " => ", doc.data());
+            tabla_base.innerHTML +=
+              `<tr>
+                  <td>${doc.id}</td>
+                  <td>${doc.data().nombre}</td>
+                  <td>${doc.data().edad}</td>
+                  <td>${doc.data().sexo}</td>
+                  <td>${doc.data().telefono}</td>
+                  <td>${doc.data().correo}</td>
+               </tr>`;
                 });
+
+                
             });
             
 
 
 
-           cargar.addEventListener("click", async () => {
-                const docRef = doc(db, "users", IDInput.value);
-                const docSnap = await getDoc(docRef);
+    cargar.addEventListener("click", async () => {
+        const docRef = doc(db, "users", IDInput.value);
+        const docSnap = await getDoc(docRef);
             
-                if (docSnap.exists()) {
-                  NombreCom.value = docSnap.data().nombre;
-                  Edd.value = docSnap.data().edad;
-                  genero.value = docSnap.data().sexo;
-                  numero.value = docSnap.data().telefono;
-                  correo.value = docSnap.data().correo;
-                    console.log("Document data:", docSnap.data());
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
-                }
-            });
-
-
-
-
-            carguar.addEventListener("click", async() => {
-                const elementRef = doc(db, "users", IDInput.value);
+        if (docSnap.exists()) {
+            NombreCom.value = docSnap.data().nombre;
+            Edd.value = docSnap.data().edad;
+            genero.value = docSnap.data().sexo;
+            numero.value = docSnap.data().telefono;
+            correo.value = docSnap.data().correo;
+              alert("documento encontrado" );
+          } 
+          
+        else {
+                    
+          alert("este docuemnto no existe en la base de datos");
+            }
             
-                await updateDoc(elementRef, {
-                  nombre:NombreCom.value,
-                  edad:Edd.value,
-                  sexo:genero.value,
-                  telefono:numero.value,
-                  correo:correo.value
-                });
-            });
+          });
 
 
 
-            borrar.addEventListener("click", async()=>{
-                await deleteDoc(doc(db, "users", IDInput.value));
-                alert('id borrado')
-            })
+
+          carguar.addEventListener("click", async() => {
+            if (IDInput.value) {
+              const elementRef = doc(db, "users", IDInput.value);
+              await updateDoc(elementRef, {
+                nombre: NombreCom.value,
+                edad: Edd.value,
+                sexo: genero.value,
+                telefono: numero.value,
+                correo: correo.value
+              });
+              alert("Cambios guardados");
+            } else {
+              alert("Ingrese una ID válida");
+            }
+          });
+          
+
+
+
+      
+
+
+    
  
 
 

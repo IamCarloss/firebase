@@ -62,7 +62,7 @@ button:hover{
   
 
 #regi{
-   visibility: visible;
+   visibility: hidden;
 }
 
 
@@ -83,6 +83,7 @@ button:hover{
  #regi{
     font-size: 20px;
     margin-bottom: 20px;
+    
 
 
  }
@@ -140,5 +141,48 @@ button:hover{
  
 .mos{
     display: block;
+} 
+
+.oculDB{
+    display: none;
 }
+
+
+
+
+
+.miTabla {
+    width: 100%;
+    border: 3px solid black;
+    font-size: 20px;
+    
+    position: absolute;
+    color: aliceblue;
+    top: 90%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-10%, -50%);
+    background-color: rgb(30, 30, 30);
+    border: solid 5px white;
+    padding: 0px;
+    
+  }
+
+   @media only screen and (max-width: 767px) {
+    #regi {
+      width: 80%;
+    }
+    .miTabla {
+      width: 90%;
+      font-size: 16px;
+    }
+  } 
+  
+  
+
+ 
+
+
+
+
  
